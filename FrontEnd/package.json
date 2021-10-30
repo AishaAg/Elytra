@@ -1,0 +1,19 @@
+{
+  "name": "elytra",
+  "version": "1.0.0",
+  "description": "A chat app built using node.js and react hosted on private server.",
+  "main": "App.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AishaAg/Elytra.git"
+  },
+  "author": "Soumya Agrawal, Adarsh Baderia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AishaAg/Elytra/issues"
+  },
+  "homepage": "https://github.com/AishaAg/Elytra#readme"
+}
