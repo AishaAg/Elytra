@@ -1,0 +1,8 @@
+FrontEnd/node_modules
+FrontEnd/.cache/
+FrontEnd/dist/
+FrontEnd/.vscode/
+FrontEnd/coverage
+FrontEnd/.DS_Store
+.vscode
+.git
