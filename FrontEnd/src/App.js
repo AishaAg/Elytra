@@ -1,7 +1,14 @@
-import { render } from 'react-dom';
-
+import ReactDOM from 'react-dom';
+import LogIn from './LogIn';
 const App = () => {
-  return <h1>Elytra</h1>;
+  return (
+    <div>
+      <h1>Elytra</h1>
+      <div id="credentials">
+        <LogIn />
+      </div>
+    </div>
+  );
 };
 
-render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
