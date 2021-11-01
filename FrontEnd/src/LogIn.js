@@ -1,8 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Redirect } from 'react-router';
+import { authentication, syncLocalStorageWithContext } from './Helper';
+import UserDetails from './UserDetails';
 
 const LogIn = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const user = useContext(UserDetails);
+  syncLocalStorageWithContext(user);
+  if (user.current.isLoggedIn) {
+    return <Redirect to="/" />;
+  }
+  const [username, setUsername] = useState('soumya_16_09');
+  const [password, setPassword] = useState('bello');
   const [userWarning, setUserWarning] = useState('');
   const [passWarning, setPassWarning] = useState('');
 
@@ -10,7 +18,7 @@ const LogIn = () => {
     <div className="login">
       <h2>Login</h2>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           setUserWarning('');
           setPassWarning('');
@@ -21,8 +29,21 @@ const LogIn = () => {
             setPassWarning('invalid password');
             document.getElementById('password').focus();
           } else {
-            setUsername('');
-            setPassword('');
+            // Authentication verification
+            const data = await authentication(username, password);
+            if (data.auth) {
+              user.current = {
+                username: username,
+                isLoggedIn: true,
+              };
+              localStorage.setItem('token', data.token);
+              setPassword('dcbkcdkhadk');
+            } else {
+              user.current = { username: '', isLoggedIn: false };
+              alert('invalid username or password');
+              setUsername('');
+              setPassword('');
+            }
           }
         }}
       >
@@ -41,6 +62,7 @@ const LogIn = () => {
           Password
           <input
             id="password"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="password"

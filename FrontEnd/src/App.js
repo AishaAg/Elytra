@@ -1,13 +1,25 @@
 import ReactDOM from 'react-dom';
 import LogIn from './LogIn';
+import UserDetails from './UserDetails';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import Home from './Home';
 const App = () => {
+  const user = useRef({
+    username: '',
+    isLoggedIn: false,
+    profilePicture: null,
+  });
+
   return (
-    <div>
-      <h1>Elytra</h1>
-      <div id="credentials">
-        <LogIn />
-      </div>
-    </div>
+    <UserDetails.Provider value={user}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={LogIn} />
+        </Switch>
+      </Router>
+    </UserDetails.Provider>
   );
 };
 
