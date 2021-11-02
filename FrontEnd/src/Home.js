@@ -1,29 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import UserDetails from './UserDetails';
-import { logout, syncLocalStorageWithContext, authorization } from './Helper';
+import { checkLoggedIn } from './Helper';
 const Home = () => {
   const user = useContext(UserDetails);
-  return (
+  const res = checkLoggedIn(user);
+  return res ? (
+    <Redirect to="/logged-in-only" />
+  ) : (
     <div>
       <h1>Elytra</h1>
-      {user.current.isLoggedIn ? (
-        <>
-          <h2>Welcome, {user.current.username}!</h2>
-          <button
-            onClick={() => {
-              logout(user)(<Redirect to="/login" />);
-            }}
-          >
-            logout
-          </button>
-        </>
-      ) : (
-        <Link to="/login">
-          <button>login</button>
-        </Link>
-      )}
+      <p>A self hosted chatting application</p>
+      <Link to="/login">
+        <p>Click here to visit login page</p>
+      </Link>
     </div>
   );
 };

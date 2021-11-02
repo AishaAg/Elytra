@@ -5,11 +5,9 @@ const logout = (user) => {
   localStorage.clear();
 };
 
-const checkLoggedIn = async (user) => {
+const checkLoggedIn = (user) => {
   syncLocalStorageWithContext(user);
-  if (!user.current.isLoggedIn) {
-    return <Redirect to="/login" />;
-  }
+  return user.current.isLoggedIn;
 };
 
 const authentication = async (username, password) => {
@@ -35,30 +33,20 @@ const authorization = async () => {
   return ret;
 };
 
-const syncLocalStorageWithContext = async (user) => {
+const syncLocalStorageWithContext = (user) => {
   token = localStorage.getItem('token');
   if (token === null) {
     // console.log('User not logged in');
     logout(user);
     return;
   } else if (!user.current.isLoggedIn) {
-    const data = await authorization();
     // console.log(data);
-    if (!data.auth) {
-      user.current = {
-        isLoggedIn: false,
-        username: '',
-        profilePicture: null,
-      };
-    } else {
-      user.current = {
-        isLoggedIn: true,
-        username: data.result.username,
-        profilePicture: null,
-      };
-    }
+    user.current = {
+      isLoggedIn: true,
+      username: localStorage.getItem('username'),
+    };
   }
 };
-export { authentication, logout, syncLocalStorageWithContext, authorization };
+export { authentication, logout, syncLocalStorageWithContext, checkLoggedIn };
 // export default authorization;
 // export default checkLoggedIn;

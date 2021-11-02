@@ -6,15 +6,17 @@ import UserDetails from './UserDetails';
 const LogIn = () => {
   const user = useContext(UserDetails);
   syncLocalStorageWithContext(user);
-  if (user.current.isLoggedIn) {
-    return <Redirect to="/" />;
-  }
+  const [redirectTo, setRedirectTo] = useState('');
+  console.log(user.current, localStorage);
+
   const [username, setUsername] = useState('soumya_16_09');
   const [password, setPassword] = useState('bello');
   const [userWarning, setUserWarning] = useState('');
   const [passWarning, setPassWarning] = useState('');
 
-  return (
+  return redirectTo !== '' ? (
+    <Redirect to={redirectTo} />
+  ) : (
     <div className="login">
       <h2>Login</h2>
       <form
@@ -37,7 +39,8 @@ const LogIn = () => {
                 isLoggedIn: true,
               };
               localStorage.setItem('token', data.token);
-              setPassword('dcbkcdkhadk');
+              localStorage.setItem('username', username);
+              setRedirectTo('/');
             } else {
               user.current = { username: '', isLoggedIn: false };
               alert('invalid username or password');
