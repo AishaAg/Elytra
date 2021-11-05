@@ -9,7 +9,7 @@ const Home = () => {
   return res ? (
     <Redirect to="/logged-in-only" />
   ) : (
-    <div className="bg-primary">
+    <div className="h-screen w-screen">
       <nav className="flex justify-end bg-white h-20">
         <div className="p-4">
           <ul>
