@@ -1,0 +1,38 @@
+{
+  "name": "elytra-backend",
+  "version": "1.0.0",
+  "description": "Elytra backend server starter",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev",
+    "start": "nodemon --exec babel-node src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AishaAg/Elytra.git"
+  },
+  "author": "Soumya Agrawal, Adarsh Baderia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AishaAg/Elytra/issues"
+  },
+  "homepage": "https://github.com/AishaAg/Elytra#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "nodemon": "^2.0.14"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "prettier": "^2.4.1"
+  }
+}
